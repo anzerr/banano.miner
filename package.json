@@ -1,0 +1,34 @@
+{
+	"name": "banano.miner",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"star": "node index.js"
+	},
+	"keywords": [],
+	"author": "anzerr",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "5.11.1",
+		"eslint-config-basic": "git+https://git@github.com/anzerr/eslintrc.git"
+	},
+	"dependencies": {
+		"request.libary": "git+https://github.com/anzerr/request.libary.git"
+	},
+	"eslintConfig": {
+		"extends": "eslint-config-basic"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/anzerr/banano.miner.git"
+	},
+	"engines": {
+		"node": ">= 0.10.0"
+	},
+	"types": "index.d.ts",
+	"bugs": {
+		"url": "https://github.com/anzerr/banano.miner/issues"
+	},
+	"homepage": "https://github.com/anzerr/banano.miner#readme"
+}
