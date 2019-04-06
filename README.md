@@ -5,15 +5,14 @@ Easyer way to "mine" on a server with no gui
 ### `Docker`
 Installing docker can be found [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-Run a:<ban_account> b:<threads>
+Run a=<ban_account> b=<threads>
 ```
-docker run -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
+docker run -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cv" -e "b=4" anzerr/bananominer:latest
 ```
 
 Build image
 ```
 docker build -t anzerr/bananominer:1.0.0 -t anzerr/bananominer:latest .
-docker push anzerr/bananominer:1.0.0 anzerr/bananominer:latest
 ```
 
 ### `Node`
