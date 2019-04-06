@@ -37,7 +37,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN chown -R pptruser:pptruser /usr/local/share/.config/yarn/global/node_modules \
-    && chown -R pptruser:pptruser /app \
+    && chown -R pptruser:pptruser /app
 
 USER pptruser
 

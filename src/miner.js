@@ -17,6 +17,7 @@ class Miner extends require('events') {
 	constructor(config) {
 		super();
 		this.api = new Api(config.host);
+		this.config = config;
 		this.app = {
 			account: config.account || 'ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp',
 			user: null,
@@ -29,9 +30,11 @@ class Miner extends require('events') {
 	}
 
 	start() {
-		this.log('start', this.app);
+		this.log('boot config', this.config);
+		this.log('fetch user for', this.app.account);
 		return this.api.get(this.app.account).then((res) => {
 			this.app.user = res;
+			this.log('start', this.app);
 			return puppeteer.launch({
 				args: [
 					'--no-sandbox',
