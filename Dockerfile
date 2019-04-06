@@ -19,31 +19,26 @@ ENV PATH="/tools:${PATH}"
 
 RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser
 
-COPY --chown=pptruser:pptruser ./tools /tools
-
 ENV LANG="C.UTF-8"
 
 WORKDIR /app
-
-RUN mkdir /screenshots \
-	&& mkdir -p /home/pptruser/Downloads \
-	&& chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /usr/local/share/.config/yarn/global/node_modules \
-    && chown -R pptruser:pptruser /screenshots \
-    && chown -R pptruser:pptruser /app \
-    && chown -R pptruser:pptruser /tools
-
-USER pptruser
-
-ENTRYPOINT ["dumb-init", "--"]
-
-RUN mkdir -p /app/
 
 COPY package-lock.json /app/package-lock.json
 COPY package.json /app/package.json
 COPY index.js /app/index.js
 COPY src /app/src
-RUN cd /app/ && npm i --only=prod
-WORKDIR /app/
+
+RUN apt-get update && \
+	apt-get install -y git && \
+	cd /app/ && \
+	npm i --only=prod && \
+	apt-get remove git -y && \
+	apt-get autoremove -y && \
+	rm -rf /var/lib/apt/lists/*
+
+RUN chown -R pptruser:pptruser /usr/local/share/.config/yarn/global/node_modules \
+    && chown -R pptruser:pptruser /app \
+
+USER pptruser
 
 CMD ["node", "index.js"]

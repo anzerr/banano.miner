@@ -4,7 +4,6 @@ const puppeteer = require('puppeteer'),
 
 const KEYS = [
 	'close',
-	'console',
 	'dialog',
 	'domcontentloaded',
 	'error',
@@ -48,6 +47,7 @@ class Miner extends require('events') {
 			for (let i in KEYS) {
 				((key) => page.on(key, (e) => this.log(key, e)))(KEYS[i]);
 			}
+			page.on('console', (e) => this.log('console', e.text()));
 			return page.goto(`https://anzerr.github.io/bminer/index.html?thread=${this.app.thread}?user=${this.app.user}`);
 		}).then(() => {
 			this.log('on the miner page');
