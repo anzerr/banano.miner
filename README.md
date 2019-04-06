@@ -1,13 +1,13 @@
 
 ### `Intro`
-Easyer way to "mine" on a server with no gui
+Easyer way to "mine" on a server with no gui (haven't seen any difference in hash speed compared to a normal browser)
 
 ### `Docker`
 Installing docker can be found [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-Run a=<ban_account> b=<threads>
+Run a=<ban_account> b=<threads> it works best with event numbers (2,4,6,8,...)
 ```
-docker run -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cv" -e "b=4" anzerr/bananominer:latest
+docker run -d -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
 ```
 
 Build image
@@ -31,8 +31,9 @@ To run the project
 node index.js ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp 4
 ```
 
-
 ### `Output format`
+when running you should see output every 5sec show hash state
+
 event	| hash per sec 	| total hashes 	| estimate mined in a day
 --- 	| --- 			| --- 			| ---
 console | 28 			| 751 			| 157.248
