@@ -55,7 +55,7 @@ class Miner extends require('events') {
 		}).then(() => {
 			this.log('on the miner page');
 			this.interval = setInterval(() => {
-				this.balance(this.app.account).then((res) => {
+				this.api.balance(this.app.account).then((res) => {
 					this.log(this.app.user, res);
 				}).catch((e) => this.log(e));
 			}, 1000 * 300);
