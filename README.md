@@ -7,7 +7,7 @@ Installing docker can be found [here](https://docs.docker.com/install/linux/dock
 
 Run a=<ban_account> b=<threads> it works best with event numbers (2,4,6,8,...)
 ```
-docker run -d -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
+docker run -d --restart -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
 ```
 
 Build image

@@ -11,4 +11,7 @@ miner.on('logs', (arg) => {
 	console.log(...arg);
 }).start().then(() => {
 	console.log('setup is done');
+}).catch((e) => {
+	console.log(e);
+	process.exit(1);
 });
