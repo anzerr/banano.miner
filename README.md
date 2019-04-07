@@ -5,12 +5,12 @@ Easyer way to "mine" on a server with no gui (haven't seen any difference in has
 ### `Docker`
 Installing docker can be found [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-Run a=<ban_account> b=<threads> it works best with even numbers (2,4,6,8,...).
+Run a=`ban_account` b=`threads` it works best with even numbers (2,4,6,8,...).
 ```
 docker run -d --restart always -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
 ```
 ##### `Thread count`
-You can find the number of core with "lscpu" in the output look for this
+You can find the number of core with `"lscpu"` in the output look for this
 ```
 Thread(s) per core:    2
 Core(s) per socket:    12
@@ -29,10 +29,10 @@ docker push anzerr/bananominer:$(node -e "console.log(require('./package.json').
 docker push anzerr/bananominer:latest
 ```
 
-### `Node`
-Installing node can be found [here](https://nodejs.org/en/download/package-manager/)
+### `NodeJs`
+Installing nodejs can be found [here](https://nodejs.org/en/download/package-manager/)
 
-The package.json is missing puppeteer to setup the project
+The package.json is missing puppeteer as it's globaly insalled in the Dockerfile. To setup the project run these commands
 ```
 git clone https://github.com/anzerr/banano.miner.git miner && \
 	cd miner && \
