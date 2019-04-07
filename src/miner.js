@@ -59,10 +59,8 @@ class Miner extends require('events') {
 					let data = {
 						account: res.match(/ban_.{60}/)[0],
 						hashes: Number(res.match(/Hashes\smined:<\/td><td>(\d+)/)[1]),
-						rate: Number(res.match(/Banano\sper\sMhash:<\/td><td>(\d+)/)[1]),
-						wallet: Number(res.match(/Confirmed\sbalance:<\/td><td>(\d+\.\d*)/)[1]),
+						ballence: Number(res.match(/Balance:\s(\d+\.{0,1}\d+)\sBAN/)[1]),
 					};
-					data.callc = data.hashes * (data.rate / 1000000);
 					this.log(this.app.user, data);
 				}).catch((e) => this.log(e));
 			}, 1000 * 60);

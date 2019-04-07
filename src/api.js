@@ -17,7 +17,7 @@ class Api {
 	}
 
 	balance(address) {
-		return new Request(this.host).get(`/index.php?r=860&ref_uid=860&json=1&address=${address}`).then((res) => {
+		return new Request(this.host).get(`/stats.php?r=860&ref_uid=860&address=${address}`).then((res) => {
 			if (res.isOkay()) {
 				return res.body().toString();
 			}
