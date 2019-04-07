@@ -56,9 +56,16 @@ class Miner extends require('events') {
 			this.log('on the miner page');
 			this.interval = setInterval(() => {
 				this.api.balance(this.app.account).then((res) => {
-					this.log(this.app.user, res);
+					let data = {
+						account: res.match(/ban_.{60}/)[0],
+						hashes: Number(res.match(/Hashes\smined:<\/td><td>(\d+)/)[1]),
+						rate: Number(res.match(/Banano\sper\sMhash:<\/td><td>(\d+)/)[1]),
+						wallet: Number(res.match(/Confirmed\sbalance:<\/td><td>(\d+\.\d*)/)[1]),
+					};
+					data.callc = data.hashes * (data.rate / 1000000);
+					this.log(this.app.user, data);
 				}).catch((e) => this.log(e));
-			}, 1000 * 300);
+			}, 1000 * 60);
 		});
 	}
 
