@@ -58,7 +58,7 @@ class Miner extends require('events') {
 				this.api.balance(this.app.account).then((res) => {
 					let data = {
 						account: res.match(/ban_.{60}/)[0],
-						hashes: Number(res.match(/Hashes\smined:<\/td><td>(\d+)/)[1]),
+						hashes: Number(res.match(/Mined\sby\syou:\s(\d+)\shashes/)[1]),
 						ballence: Number(res.match(/Balance:\s(\d+\.{0,1}\d+)\sBAN/)[1]),
 					};
 					this.log(this.app.user, data);
