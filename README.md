@@ -2,6 +2,14 @@
 ### `Intro`
 Easyer way to "mine" on a server with no gui (haven't seen any difference in hash speed compared to a normal browser)
 
+### `Error`
+If you are getting `TypeError: this.balance is not a function` you are using a old version
+you can use image `anzerr/bananominer:1.0.4` or delete the old image and re-pull
+````
+docker pull anzerr/bananominer:latest && docker pull anzerr/bananominer:latest
+```
+This error doesn't stop you mining it's a report to view your state on the api.
+
 ### `Docker`
 Installing docker can be found [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
