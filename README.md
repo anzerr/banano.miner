@@ -56,6 +56,15 @@ node index.js ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp 4
 ### `Output format`
 when running you should see output every 5sec show hash state
 
-event	| hash per sec 	| total hashes 	| estimate mined in a day
---- 	| --- 			| --- 			| ---
-console | 28 			| 751 			| 157.248
+example
+```
+console 64.4/Hps, session: (0.05334BAN, 1778/H), 24h estimate 166.92480000000003BAN
+```
+Every 5 mins you'll get the websites stats for the current account being ran for
+```
+dc754b618731c8924aefb61b51e18728 {
+	account: 'ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp',
+	hashes: 39736133,
+	balance: 0.48384
+}
+```
