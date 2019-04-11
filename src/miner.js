@@ -32,7 +32,9 @@ class Miner extends require('events') {
 	start() {
 		this.log('boot config', this.config);
 		this.log('fetch user for', this.app.account);
-		return this.api.get(this.app.account).then((res) => {
+		return this.api.create(this.app.account).then((res) => {
+			return this.api.get(this.app.account);
+		}).then(() => {
 			this.app.user = res;
 			this.log('start', this.app);
 			return puppeteer.launch({
