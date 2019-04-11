@@ -25,6 +25,14 @@ class Miner extends require('events') {
 		};
 	}
 
+	health() {
+		clearTimeout(this._close);
+		this._close = setTimeout(() => {
+			console.log('not logs from workers in to long');
+			process.exit(1);
+		}, 1000 * 60);
+	}
+
 	log(...arg) {
 		this.emit('logs', arg);
 	}
@@ -53,7 +61,11 @@ class Miner extends require('events') {
 			for (let i in KEYS) {
 				((key) => page.on(key, (e) => this.log(key, e)))(KEYS[i]);
 			}
-			page.on('console', (e) => this.log('console', e.text()));
+			this.health();
+			page.on('console', (e) => {
+				this.log('console', e.text());
+				this.health();
+			});
 			return page.goto(`https://anzerr.github.io/bminer/index.html?thread=${this.app.thread}?user=${this.app.user}`);
 		}).then(() => {
 			this.log('on the miner page');
