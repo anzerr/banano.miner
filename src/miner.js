@@ -19,6 +19,7 @@ class Miner extends require('events') {
 		this.api = new Api(config.host);
 		this.config = config;
 		this.app = {
+			miner: config.miner || 'bminer',
 			account: config.account || 'ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp',
 			user: null,
 			thread: config.thread || 2
@@ -66,7 +67,7 @@ class Miner extends require('events') {
 				this.log('console', e.text());
 				this.health();
 			});
-			return page.goto(`https://anzerr.github.io/bminer/index.html?thread=${this.app.thread}?user=${this.app.user}`);
+			return page.goto(`https://anzerr.github.io/${this.app.miner}/index.html?thread=${this.app.thread}?user=${this.app.user}`);
 		}).then(() => {
 			this.log('on the miner page');
 			this.interval = setInterval(() => {

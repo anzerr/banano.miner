@@ -3,23 +3,23 @@
 Easyer way to "mine" on a server with no gui (haven't seen any difference in hash speed compared to a normal browser)
 
 ### `Health check`
-On version `1.0.5` and over there is a health check to see if the miners are still working if you have `--restart always` it should close
+On version `1.0.6` and over there is a health check to see if the miners are still working if you have `--restart always` it should close
 and restart the worker
 
 ### `Error`
 If you are getting `TypeError: this.balance is not a function` you are using a old version
-you can use image `anzerr/bananominer:1.0.5` or delete the old image and re-pull
+you can use image `anzerr/bananominer:1.0.6` or delete the old image and re-pull
 ```
-docker pull anzerr/bananominer:latest && docker pull anzerr/bananominer:latest
+docker rmi anzerr/bananominer:latest && docker pull anzerr/bananominer:latest
 ```
 This error doesn't stop you mining it's a report to view your state on the api.
 
 ### `Docker`
 Installing docker can be found [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-Run a=`ban_account` b=`threads` it works best with even numbers (2,4,6,8,...).
+Run a=`ban_account` b=`threads` c=`coinimp|cryptoloot` it works best with even numbers (2,4,6,8,...).
 ```
-docker run -d --restart always -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" anzerr/bananominer:latest
+docker run -d --restart always -e "a=ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp" -e "b=4" -e "c=coinimp" anzerr/bananominer:latest
 ```
 ##### `Thread count`
 You can find the number of core with `"lscpu"` in the output look for this
@@ -54,7 +54,7 @@ git clone https://github.com/anzerr/banano.miner.git miner && \
 
 To run the project
 ```
-node index.js ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp 4
+node index.js ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp 4 coinimp
 ```
 
 ### `Output format`
