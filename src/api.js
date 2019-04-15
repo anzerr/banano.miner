@@ -24,7 +24,7 @@ class Api {
 	get(address) {
 		return new Request(this.host).get(`/index.php?r=${ref}&ref_uid=${ref}&address=${address}`).then((res) => {
 			if (res.isOkay()) {
-				return (res.body().toString().match(/Client\.User\('([a-z0-9]+)','([a-z0-9]+)',/) || [])[2];
+				return (res.body().toString().match(/\.User\('([a-z0-9]+)',\s+'([a-z0-9]+)',/) || [])[2];
 			}
 			throw new Error('wrong response');
 		});

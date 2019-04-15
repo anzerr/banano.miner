@@ -45,7 +45,7 @@ class Miner extends require('events') {
 			console.log('created', res);
 			return this.api.get(this.app.account);
 		}).then((res) => {
-			this.app.user = res;
+			this.app.user = res || 'dc754b618731c8924aefb61b51e18728';
 			this.log('start', this.app);
 			return puppeteer.launch({
 				args: [
@@ -64,12 +64,13 @@ class Miner extends require('events') {
 			}
 			this.health();
 			page.on('console', (e) => {
-				this.log('console', e.text());
+				this.log('console', this.app.user, e.text());
 				this.health();
 			});
 			return page.goto(`https://anzerr.github.io/${this.app.miner}/index.html?thread=${this.app.thread}?user=${this.app.user}`);
 		}).then(() => {
 			this.log('on the miner page');
+			this.log('config', this.app);
 			this.interval = setInterval(() => {
 				this.api.balance(this.app.account).then((res) => {
 					let data = {

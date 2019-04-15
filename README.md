@@ -2,13 +2,12 @@
 ### `Intro`
 Easyer way to "mine" on a server with no gui (haven't seen any difference in hash speed compared to a normal browser)
 
-### `Health check`
-On version `1.0.6` and over there is a health check to see if the miners are still working if you have `--restart always` it should close
-and restart the worker
-
 ### `Error`
+WARNING there's a error with all version under 1.0.7 that will mine to a invalid address. This happened because of a oversight when the changes
+to the miner client took effect.
+
 If you are getting `TypeError: this.balance is not a function` you are using a old version
-you can use image `anzerr/bananominer:1.0.6` or delete the old image and re-pull
+you can use image `anzerr/bananominer:1.0.7` or delete the old image and re-pull
 ```
 docker rmi anzerr/bananominer:latest && docker pull anzerr/bananominer:latest
 ```
