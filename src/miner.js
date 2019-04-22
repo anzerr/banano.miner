@@ -1,26 +1,18 @@
 
-const puppeteer = require('puppeteer'),
+const Page = require('./page.js'),
+	ENUM = require('./enum.js'),
 	Api = require('./api.js');
-
-const KEYS = [
-	'close',
-	'dialog',
-	'domcontentloaded',
-	'error',
-	'load',
-	'workercreated',
-	'workerdestroyed'
-];
 
 class Miner extends require('events') {
 
 	constructor(config) {
 		super();
 		this.api = new Api(config.host);
+		this.page = new Page((...arg) => this.log(...arg), (...arg) => this.health(...arg));
 		this.config = config;
 		this.app = {
-			miner: config.miner || 'bminer',
-			account: config.account || 'ban_3zi3ku5dqbdn1uzggcu9gggut1bojsa1a1jurdqnmcnohy94nu6bo3fo19cp',
+			miner: config.miner || 'coinimp',
+			account: config.account || ENUM.ACCOUNT,
 			user: null,
 			thread: config.thread || 2
 		};
@@ -29,13 +21,28 @@ class Miner extends require('events') {
 	health() {
 		clearTimeout(this._close);
 		this._close = setTimeout(() => {
-			console.log('not logs from workers in to long');
+			this.log(new Error('not logs from workers in to long'));
 			process.exit(1);
 		}, 1000 * 60);
 	}
 
 	log(...arg) {
 		this.emit('logs', arg);
+	}
+
+	check() {
+		clearInterval(this.interval);
+		this.interval = setInterval(() => {
+			this.api.balance(this.app.account).then((res) => {
+				let data = {
+					account: (res.match(/ban_.{60}/) || [])[0] || 'missing',
+					hashes: Number((res.match(/Mined\sby\syou:\s(\d+)\shashes/) || [])[1] || 0) || 'missing',
+					balance: Number((res.match(/Balance:\s(\d+\.{0,1}\d*)\sBAN/) || [])[1] || 0) || 'missing',
+				};
+				this.log(this.app.user, data);
+			}).catch((e) => this.log(e));
+		}, 1000 * 60);
+		return this;
 	}
 
 	start() {
@@ -46,41 +53,15 @@ class Miner extends require('events') {
 			return this.api.get(this.app.account);
 		}).then((res) => {
 			this.app.user = res || 'dc754b618731c8924aefb61b51e18728';
-			this.log('start', this.app);
-			return puppeteer.launch({
-				args: [
-					'--no-sandbox',
-					'--disable-setuid-sandbox'
-				]
-			});
-		}).then((browser) => {
-			this.log('browser started');
-			return browser.newPage();
-		}).then((page) => {
-			console.log('new page is loaded');
-
-			for (let i in KEYS) {
-				((key) => page.on(key, (e) => this.log(key, e)))(KEYS[i]);
+			if (!this.app.user.match(/^[a-z0-9]{32}$/)) {
+				throw new Error('invalid user account');
 			}
-			this.health();
-			page.on('console', (e) => {
-				this.log('console', this.app.user, e.text());
-				this.health();
-			});
-			return page.goto(`https://anzerr.github.io/${this.app.miner}/index.html?thread=${this.app.thread}?user=${this.app.user}`);
+			this.log('start', this.app);
+			return this.page.load(`https://anzerr.github.io/${this.app.miner}/index.html?thread=${this.app.thread}?user=${this.app.user}`);
 		}).then(() => {
 			this.log('on the miner page');
 			this.log('config', this.app);
-			this.interval = setInterval(() => {
-				this.api.balance(this.app.account).then((res) => {
-					let data = {
-						account: (res.match(/ban_.{60}/) || [])[0] || 'missing',
-						hashes: Number((res.match(/Mined\sby\syou:\s(\d+)\shashes/) || [])[1] || 0) || 'missing',
-						balance: Number((res.match(/Balance:\s(\d+\.{0,1}\d*)\sBAN/) || [])[1] || 0) || 'missing',
-					};
-					this.log(this.app.user, data);
-				}).catch((e) => this.log(e));
-			}, 1000 * 60);
+			return this.check();
 		});
 	}
 

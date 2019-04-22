@@ -1,10 +1,11 @@
 {
 	"name": "banano.miner",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"star": "node index.js"
+		"start": "node index.js",
+		"build": "docker build -t anzerr/bananominer:$(node -e \"console.log(require('./package.json').version)\") -t anzerr/bananominer:latest ."
 	},
 	"keywords": [],
 	"author": "anzerr",
