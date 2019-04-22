@@ -8,7 +8,7 @@ class Miner extends require('events') {
 	constructor(config) {
 		super();
 		this.api = new Api(config.host);
-		this.page = new Page((...arg) => this.log(...arg), (...arg) => this.health(...arg));
+		this.page = new Page(this);
 		this.config = config;
 		this.app = {
 			miner: config.miner || 'coinimp',

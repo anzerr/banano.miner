@@ -4,9 +4,14 @@ const puppeteer = require('puppeteer'),
 
 class Page {
 
-	constructor(log, health) {
-		this.log = log;
-		this.health = health;
+	get app() {
+		return this.core.app;
+	}
+
+	constructor(core) {
+		this.log = (...arg) => core.log(...arg);
+		this.health = (...arg) => core.health(...arg);
+		this.core = core;
 	}
 
 	load(url) {

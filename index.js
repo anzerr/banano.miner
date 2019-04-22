@@ -9,11 +9,13 @@ const config = {
 };
 const miners = ['coinimp'/* , 'cryptoloot', 'minero'*/];
 
+console.log('config', config);
+
 if (!config.account.match(/^ban_(3|1)[a-z0-9]{59}$/)) {
 	throw new Error('invalid banano address');
 }
 
-if (config.thread > 0) {
+if (config.thread < 1) {
 	throw new Error('can\'t use less than 1 threads');
 }
 
