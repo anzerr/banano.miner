@@ -2,6 +2,9 @@
 ### `Intro`
 Easyer way to "mine" on a server with no gui (haven't seen any difference in hash speed compared to a normal browser)
 
+### `Migration to new website`
+The migration to https://powerplant.banano.cc has started and takes effect from version 1.0.8 onward.
+
 ### `Error`
 WARNING there's a error with all version under 1.0.7 that will mine to a invalid address. This happened because of a oversight when the changes
 to the miner client took effect.
