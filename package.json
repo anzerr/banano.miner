@@ -1,6 +1,6 @@
 {
 	"name": "banano.miner",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "A wrapper around puppeteer to web mine for bananos",
 	"main": "index.js",
 	"scripts": {
